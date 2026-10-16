@@ -64,9 +64,10 @@ dependencies {
 
     // EMI
     if (project.hasProperty('emi_version')) {
-        compileOnly "curse.maven:emi-580555:${emi_version}"
+        // Fleet: EMI = SEMI from the local maven repo
+        compileOnly "dev.emi:emi-neoforge:${emi_version}:api"
         if (project.hasProperty('enable_emi') && project.enable_emi.toBoolean()) {
-            runtimeOnly "curse.maven:emi-580555:${emi_version}"
+            runtimeOnly "dev.emi:emi-neoforge:${emi_version}"
         }
     }
 
