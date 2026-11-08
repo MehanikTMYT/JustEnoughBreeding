@@ -41,27 +41,6 @@ neoForge {
 }
 
 dependencies {
-    // JEI
-    if (project.hasProperty('jei_version')) {
-        compileOnly("mezz.jei:jei-${neoforge_minecraft_version}-common-api:${jei_version}")
-        compileOnly("mezz.jei:jei-${neoforge_minecraft_version}-neoforge-api:${jei_version}")
-        compileOnly "me.shedaniel:REIPluginCompatibilities-forge-annotations:${reipc_forge_annotations_version}"
-        if (project.hasProperty('enable_jei') && project.enable_jei.toBoolean()) {
-            runtimeOnly("mezz.jei:jei-${neoforge_minecraft_version}-neoforge:${jei_version}")
-        }
-    }
-
-    // REI
-    if (project.hasProperty('rei_version') && project.hasProperty('cloth_config_version') && project.hasProperty('architectury_version')) {
-        compileOnly "me.shedaniel:RoughlyEnoughItems-api-neoforge:${rei_version}"
-        compileOnly "me.shedaniel:RoughlyEnoughItems-default-plugin-neoforge:${rei_version}"
-        api "me.shedaniel.cloth:cloth-config-neoforge:${cloth_config_version}"
-        api "dev.architectury:architectury-neoforge:${architectury_version}"
-        if (project.hasProperty('enable_rei') && project.enable_rei.toBoolean()) {
-            runtimeOnly "me.shedaniel:RoughlyEnoughItems-neoforge:${rei_version}"
-        }
-    }
-
     // EMI
     if (project.hasProperty('emi_version')) {
         // Fleet: EMI = SEMI from the local maven repo
@@ -94,12 +73,6 @@ tasks.register('publishCurseForge', TaskPublishCurseForge) {
 	mainFile.addModLoader("${project.name}")
     "${neoforge_release_versions}".split(',').each {
         mainFile.addGameVersion("${it}")
-    }
-    if (project.hasProperty('jei_version')) {
-        mainFile.addOptional("jei")
-    }
-    if (project.hasProperty('rei_version')) {
-        mainFile.addOptional("roughly-enough-items")
     }
     if (project.hasProperty('emi_version')) {
         mainFile.addOptional("emi")
@@ -178,12 +151,6 @@ modrinth {
     loaders = ["${project.name}"]
     environment = "client_and_server"
     dependencies {
-        if (project.hasProperty('jei_version')) {
-            optional.project "jei"
-        }
-        if (project.hasProperty('rei_version')) {
-            optional.project "rei"
-        }
         if (project.hasProperty('emi_version')) {
             optional.project "emi"
         }

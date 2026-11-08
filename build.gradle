@@ -7,20 +7,14 @@ plugins {
 
 subprojects {
     repositories {
-        maven {
-            name = "ModMaven"
-            url = "https://modmaven.dev/"
-            content {
-                includeGroup "mezz.jei"
-            }
-        }
+        // синк/порт 26.1.2: репозиторий ModMaven удалена — политика EMI-only (просмотрщик EMI)
         maven {
             url "https://www.cursemaven.com"
             content {
                 includeGroup "curse.maven"
             }
         }
-        maven { url "https://maven.shedaniel.me" }
+        // синк/порт 26.1.2: maven.shedaniel.me удалена — больше нет REI/cloth-зависимостей
         maven { url "https://maven.architectury.dev/" }
         maven {
             name = "TerraformersMC" //EMI
